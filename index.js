@@ -3,7 +3,7 @@ const app = express()
 
 //Sinaliza para o express que o corpo das requisições
 //estará sempre em Json
-app.use(express.json())
+app.use(express.json());
 
 app.get('/', function (req, res) {
   res.send('Hello World')
@@ -24,11 +24,15 @@ app.get('/items', function(req, res){
 
 // CREAT - POST - items
 
-app.post('/items', function(res,res){
-  console.log(req.body, typeof req.body)
-  const item = req.body.nome
-  console.log(item)
-  res.send('Create items')
+app.post('/items', function(req,res){
+//Extraio a informação do corpo da requisição
+  const item = req.body.name
+  
+//insiro ela na lista
+items.push(item)
+
+//enviamos uma mensagem de sucesso
+  res.send('Item create sucessfully')
 })
 
 app.listen(3000)
