@@ -50,4 +50,19 @@ items.push(item)
   res.send('Item create sucessfully')
 })
 
+//UPDATE - [PUT] - /items/:id
+app.put('/items/:id', function(req, res){
+
+//Acessamos o parâmetro de rota e corrigimos o índice
+  const id = req.params.id -1
+
+//Obtemos o novo item a partir do corpo da requisição
+  const newItem = req.body.name
+
+//Colocamos o novo item na mesma posição do item anterior
+  items[id] = newItem
+
+//Enviamos uma mensagem de sucesso
+  res.send('Item update sucessfully.')
+})
 app.listen(3000)
