@@ -97,21 +97,29 @@ app.put('/items/:id', function(req, res){
   const id = +req.params.id
 
 //Obtemos o novo item a partir do corpo da requisição
-  const newItem = req.body.name
+  const newItem = req.body
 
 //Colocamos o novo item na mesma posição do item anterior
-  items[id] = newItem
+  const index = items.findIndex(function(elemento) {
+    return elemento.id === id
+  })
+  items[index] = {
+    ...newItem,
+    id, 
+  }
 
 //Enviamos uma mensagem de sucesso
-  res.send('Item update sucessfully.')
+  res.send(items[index])
 })
 
 // DELETE - [DELETE] /items/:id
 app.delete('/items/:id', function(req,res){
 //Acessamos o parâmetro de rota e corrigimos o índice
-  const id = req.params.id - 1
+  const id = +req.params.id
 //Removemos a informação a partir do índice 
-  delete items[id]
+  delete items.findIndex(function(elemento){
+    return elemento.id === id
+  })
 //Enviamos uma mensagem de sucesso
   res.send('Item delete sucessfully')
 })
