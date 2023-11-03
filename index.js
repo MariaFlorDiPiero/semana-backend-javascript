@@ -81,13 +81,19 @@ app.post('/items', function(req,res){
 //Extraio a informação do corpo da requisição
   const item = req.body
 
+  if (!item || !item.name || !item.imageUrl){
+    return res.status(400).send({
+      message: 'name & imageUrl required.'
+    })
+  }
+
   item.id = items.length + 1
   
 //insiro ela na lista
 items.push(item)
 
 //enviamos uma mensagem de sucesso
-  res.send(item)
+  res.status(201).send(item)
 })
 
 //UPDATE - [PUT] - /items/:id
